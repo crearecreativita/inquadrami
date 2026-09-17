@@ -31,7 +31,7 @@ python3 -m http.server 8080
 
 ## Note tecniche
 
-- La quiet zone (4 moduli) e la cornice sono disegnate dal tool, non da qr-code-styling (`margin: 0`).
+- La quiet zone (2 moduli, scelta estetica sotto lo standard di 4: la verifica jsQR la convalida a ogni render) e la cornice sono disegnate dal tool, non da qr-code-styling (`margin: 0`).
 - Il testo viene pre-codificato in UTF-8 byte per byte prima di passarlo a qr-code-styling, che altrimenti tronca ogni carattere a un byte (accenti ed emoji arriverebbero corrotti ai lettori).
 - Una vCard completa sono ~200 caratteri → 77×77 moduli con ECC H: il tool avvisa sopra i 150 caratteri. Per biglietti piccoli valuta un link alla pagina contatti.
 - La verifica usa `inversionAttempts: 'dontInvert'`: un QR invertito (chiaro su scuro) viene segnalato ma non approvato, perché molti lettori non lo aprono.

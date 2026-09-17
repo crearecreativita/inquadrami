@@ -103,7 +103,6 @@ h1 {
   max-width: 440px;
   height: auto;
   display: block;
-  filter: drop-shadow(0 16px 40px rgba(0,0,0,.45));
   transition: opacity .15s;
 }
 .stage.is-busy svg { opacity: .55; }

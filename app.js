@@ -18,15 +18,17 @@
                                           // personalizzazione e non la densità. Tre scale perché jsQR ha
                                           // fallimenti di aliasing a scale isolate: passa con 2 su 3.
   const MM_PER_MODULE = 0.6;     // regola pratica per la dimensione minima di stampa
+  const QUIET_MODULES = 2;       // quiet zone attorno al QR (lo standard dice 4; 2 è il compromesso estetico
+                                 // scelto, e la verifica jsQR lo convalida a ogni render)
 
   const VC_FIELDS = ["nome", "cognome", "azienda", "tel", "email", "sito"];
   const VC_COMFORT = 150; // sotto questa lunghezza la vCard resta attorno ai 45-49 moduli
 
   const DEFAULTS = {
     mode: "link",
-    link: "https://www.crearecreativita.it",
+    link: "https://www.iltuosito.it",
     vcard: { nome: "", cognome: "", azienda: "", tel: "", email: "", sito: "" },
-    data: "https://www.crearecreativita.it", // testo effettivamente codificato, derivato da mode
+    data: "https://www.iltuosito.it", // testo effettivamente codificato, derivato da mode
     shape: 'square',
     corner: 'auto',
     colorMode: 'solid',
@@ -42,6 +44,7 @@
     frameText: '#bff747',
     cta: 'INQUADRAMI',
     radius: 40,
+    frameW: 4, // spessore cornice in % del lato del QR
     pngSize: 2048,
   };
   let state = { ...DEFAULTS, vcard: { ...DEFAULTS.vcard } };
@@ -96,7 +99,9 @@
     frameColor: $('#frameColor'),
     frameText: $('#frameText'),
     cta: $('#cta'),
-    radius: $('#radius'),
+    radius: $("#radius"),
+    frameW: $("#frameW"),
+    frameWOut: $("#frameWOut"),
     radiusOut: $('#radiusOut'),
     reset: $("#reset"),
     pngSizeOut: $("#pngSizeOut"),
@@ -190,7 +195,7 @@
 
   // ---------- Composizione: quiet zone + cornice + CTA ----------
   function compose(innerSvgText, modules) {
-    const pad = Math.round((4 * Q) / modules); // quiet zone = 4 moduli
+    const pad = Math.round((QUIET_MODULES * Q) / modules);
     const inner = new DOMParser().parseFromString(innerSvgText, 'image/svg+xml').documentElement;
     inner.setAttribute('width', Q);
     inner.setAttribute('height', Q);
@@ -200,7 +205,7 @@
     let W, H;
 
     if (state.frameOn) {
-      const fw = Math.round(Q * 0.07);
+      const fw = Math.round((Q * state.frameW) / 100);
       const card = Q + 2 * pad;
       const text = state.cta.trim().toUpperCase();
       const bandH = text ? Math.round(Q * 0.17) : 0;
@@ -393,6 +398,8 @@
     el.cta.value = state.cta;
     el.radius.value = state.radius;
     el.radiusOut.textContent = state.radius;
+    el.frameW.value = state.frameW;
+    el.frameWOut.textContent = `${state.frameW}%`;
     setSegmented("#pngSize", String(state.pngSize));
     updatePngSizeOut();
     updateContrast();
@@ -553,6 +560,7 @@
 
   el.frameOn.addEventListener('change', () => { state.frameOn = el.frameOn.checked; el.frameOpts.hidden = !state.frameOn; scheduleRender(); });
   el.cta.addEventListener('input', () => { state.cta = el.cta.value; scheduleRender(); });
+  el.frameW.addEventListener("input", () => { state.frameW = +el.frameW.value; el.frameWOut.textContent = `${state.frameW}%`; scheduleRender(); });
   el.radius.addEventListener('input', () => { state.radius = +el.radius.value; el.radiusOut.textContent = state.radius; scheduleRender(); });
 
   $("#pngSize").addEventListener("click", (e) => {

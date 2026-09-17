@@ -66,7 +66,7 @@
       <div id="modeLink">
         <label class="field">
           <span class="label">URL o testo da codificare</span>
-          <textarea id="data" rows="2" spellcheck="false" placeholder="https://…">https://www.crearecreativita.it</textarea>
+          <textarea id="data" rows="2" spellcheck="false" placeholder="https://…">https://www.iltuosito.it</textarea>
         </label>
       </div>
 
@@ -75,12 +75,12 @@
           <label class="field"><span class="label">Nome</span><input type="text" id="vcNome" autocomplete="off" placeholder="Alessandro"></label>
           <label class="field"><span class="label">Cognome</span><input type="text" id="vcCognome" autocomplete="off" placeholder="Rossi"></label>
         </div>
-        <label class="field"><span class="label">Azienda / studio</span><input type="text" id="vcAzienda" autocomplete="off" placeholder="Creare Creatività"></label>
+        <label class="field"><span class="label">Azienda / studio</span><input type="text" id="vcAzienda" autocomplete="off" placeholder="Nome azienda"></label>
         <div class="row two">
           <label class="field"><span class="label">Telefono</span><input type="text" id="vcTel" inputmode="tel" autocomplete="off" placeholder="+39 333 1234567"></label>
           <label class="field"><span class="label">Email</span><input type="text" id="vcEmail" inputmode="email" autocomplete="off" placeholder="ciao@esempio.it"></label>
         </div>
-        <label class="field"><span class="label">Sito</span><input type="text" id="vcSito" inputmode="url" autocomplete="off" placeholder="crearecreativita.it"></label>
+        <label class="field"><span class="label">Sito</span><input type="text" id="vcSito" inputmode="url" autocomplete="off" placeholder="il tuo sito"></label>
         <p class="note mono" id="vcNote">Tutti i campi sono opzionali. iPhone e Android aprono direttamente "Aggiungi ai contatti".</p>
       </div>
 
@@ -213,6 +213,11 @@
         <label class="field">
           <span class="label">Call to action</span>
           <input type="text" id="cta" value="INQUADRAMI" maxlength="24" placeholder="es. MENU · SCANSIONAMI · PRENOTA">
+        </label>
+
+        <label class="field range">
+          <span class="label">Spessore cornice <output class="mono" id="frameWOut">4%</output></span>
+          <input type="range" id="frameW" min="2" max="10" step="1" value="4">
         </label>
 
         <label class="field range">
