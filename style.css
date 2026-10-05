@@ -364,3 +364,4 @@ input[type="range"] {
 /* Incorporato in un iframe (es. Elementor): la pagina ospitante ha già titolo e brand */
 .embedded .top .eyebrow,
 .embedded .top h1 { display: none; }
+.embedded, .embedded body { overflow: hidden; }

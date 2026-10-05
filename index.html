@@ -245,5 +245,20 @@
 <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.9.2/lib/qr-code-styling.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <script src="app.js"></script>
+<script>
+/* Incorporato in un iframe: comunica l'altezza al sito ospitante, che ridimensiona l'iframe
+   così non esiste uno scroll interno e la rotella scorre la pagina intera. */
+(function () {
+  if (window.self === window.top) return;
+  var last = 0;
+  function send() {
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    if (h && h !== last) { last = h; window.parent.postMessage({ type: 'inquadrami-height', height: h }, '*'); }
+  }
+  window.addEventListener('load', send);
+  window.addEventListener('resize', send);
+  if (window.ResizeObserver) new ResizeObserver(send).observe(document.body);
+})();
+</script>
 </body>
 </html>
