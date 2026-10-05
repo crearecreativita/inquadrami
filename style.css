@@ -365,3 +365,6 @@ input[type="range"] {
 .embedded .top .eyebrow,
 .embedded .top h1 { display: none; }
 .embedded, .embedded body { overflow: hidden; }
+.embedded .top { padding-top: 0; }
+.embedded .tagline { margin-top: 0; }
+.embedded .foot-brand { display: none; }
