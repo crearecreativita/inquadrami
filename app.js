@@ -41,7 +41,7 @@
     logoMargin: 10,
     frameOn: true,
     frameColor: '#1b1a1c',
-    frameText: '#bff747',
+    frameText: '#f92273',
     cta: 'INQUADRAMI',
     radius: 40,
     frameW: 4, // spessore cornice in % del lato del QR
